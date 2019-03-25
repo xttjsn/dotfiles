@@ -1,0 +1,25 @@
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/lib64:/usr/lib64
+
+source ~/.py35/bin/activate.fish
+
+export QUANDL_API_KEY=3UJToQtp6zKjqSGZhovK
+alias jn=jupyter-notebook
+export INTRINIO_API_KEY=OjQ0OTk5NWNhNzhlNzYzYWY1MjYwZjA5ZDQ5YmRiNjQw
+export INTRINIO_USER='7518fb6528c6ae632eaf06e4849bca74'
+export INTRINIO_PWD='f2b223e23f63ea129fcf6d424e332224'
+
+alias cs166='cd ~/Dropbox/Brown/Course/1660'
+alias browncs='ssh txiaotin@ssh.cs.brown.edu'
+alias sf='screenfetch -A "Mac OS X"'
+alias sc='source ~/.fishrc'
+
+export GOPATH=~/go
+export PATH=$PATH:$GOPATH/bin
+export GIT_TERMINAL_PROMPT=1
+
+export PATH=$PATH:~/.local/bin
+
+alias opengdm="sudo service gdm start"
+
+alias dk="xinput set-int-prop 7 \"Device Enabled\" 8 0"
+alias ek="xinput set-int-prop 7 \"Device Enabled\" 8 1"
