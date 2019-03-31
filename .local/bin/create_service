@@ -1,0 +1,19 @@
+#!/bin/bash
+
+USAGE="create_service <name> <script>"
+
+if [[ $# -ne 2 ]]; then
+	echo $USAGE
+	exit
+fi
+
+NAME=$1
+SCRIPT=$(which "$2")
+
+TEMPLATE="[Unit]\nDescription=$NAME\n\n[Service]\nExecStart=/bin/bash $SCRIPT\n\n[Install]\nWantedBy=default.target"
+
+echo -e $TEMPLATE > "$HOME/.config/systemd/user/$NAME.service"
+systemctl --user enable $NAME
+systemctl --user start $NAME
+
+

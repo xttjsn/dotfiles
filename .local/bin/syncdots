@@ -1,0 +1,48 @@
+#!/bin/bash
+
+USAGE="syncdots"
+
+if [[ $# -ne 0 ]]; then
+	echo $USAGE
+	exit
+fi
+
+declare -a DOTS=(".emacs.d/el"
+	  ".emacs.d/snippets"
+	  ".emacs.d/workgroups"
+	  ".emacs.d/init.el"
+	  ".emacs.d/smex-items"
+	  ".urxvt"
+	  ".Xresources"
+	  ".bashrc"
+	  ".fishrc"
+	  ".profile"
+	  ".xinitrc"
+	  ".z"
+	  ".zshrc"
+	  ".local/bin")
+
+DOTPATH="$HOME/.dotfiles"
+
+mkdir -p $DOTPATH
+
+for f in "${DOTS[@]}"
+do
+	mkdir -p $(dirname $DOTPATH/$f)
+	if [ -d "${f}" ]; then
+		rsync -au --copy-links --exclude ".git" "$f/" "$DOTPATH/$f/"
+	else
+		rsync -au --copy-links $f "$DOTPATH/$f"
+	fi
+	   
+done
+
+# Reverse sync for git pull update
+for f in "${DOTS[@]}"
+do
+	if [ -d "${f}" ]; then
+		rsync -au --exclude ".git" "$DOTPATH/$f/" "$f/"
+	else
+		rsync -au "$DOTPATH/$f" $f
+	fi
+done
